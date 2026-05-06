@@ -13,6 +13,7 @@ namespace GraphicPlotter
 {
     public partial class Form1 : Form
     {
+        private const int MarksCount = 10;
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +22,10 @@ namespace GraphicPlotter
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+        private double CalculateFunction(double x)
+        {
+            return Math.Pow(Math.Cos(10 * x), 2) + x;
         }
         private void SetupChart()
         {
@@ -35,7 +40,7 @@ namespace GraphicPlotter
 
             for (double x = -10; x <= 10; x += 0.1)
             {
-                double y = Math.Pow(Math.Cos(10 * x), 2) + x;
+                double y = CalculateFunction(x);
                 chart1.Series[0].Points.AddXY(x, y);
             }
 
@@ -74,7 +79,7 @@ namespace GraphicPlotter
             g.DrawString("X", font, brush, width - 30, center.Y - 20);
             g.DrawString("Y", font, brush, center.X + 10, 10);
 
-            int marks = 10;
+            int marks = MarksCount;
             float xStep = (width - 40) / (2f * marks);
             float yStep = (height - 40) / (2f * marks);
 
@@ -100,7 +105,7 @@ namespace GraphicPlotter
             for (int i = 0; i < 1000; i++)
             {
                 float x = -10 + i * 20f / 999;
-                float y = (float)(Math.Pow(Math.Cos(10 * x), 2) + x);
+                float y = (float)CalculateFunction(x);
                 points[i] = new PointF(
                     center.X + x * xStep / 2,
                     center.Y - y * yStep / 2);
