@@ -13,6 +13,7 @@ namespace GraphicPlotter
 {
     public partial class Form1 : Form
     {
+        private const int GraphPointsCount = 1000;
         public Form1()
         {
             InitializeComponent();
@@ -96,10 +97,10 @@ namespace GraphicPlotter
                 g.DrawLine(axisPen, center.X - 5, yPos, center.X + 5, yPos);
                 g.DrawString((-i * 2).ToString(), font, brush, center.X + 10, yPos - 10);
             }
-            PointF[] points = new PointF[1000];
-            for (int i = 0; i < 1000; i++)
+            PointF[] points = new PointF[GraphPointsCount];
+            for (int i = 0; i < GraphPointsCount; i++)
             {
-                float x = -10 + i * 20f / 999;
+                float x = -10 + i * 20f / (GraphPointsCount - 1);
                 float y = (float)(Math.Pow(Math.Cos(10 * x), 2) + x);
                 points[i] = new PointF(
                     center.X + x * xStep / 2,
